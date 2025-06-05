@@ -13,7 +13,7 @@ async def call_payman(query: str) -> Optional[str]:
     payload = {"question": query}
 
     try:
-        response = requests.post(PAYMAN_API_URL, json=payload, timeout=10)
+        response = requests.post(PAYMAN_API_URL, json=payload, timeout=40)
         response.raise_for_status()  # ako HTTP status nije 200 - baca grešku
         data = response.json()
 
