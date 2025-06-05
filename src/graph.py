@@ -32,12 +32,18 @@ async def call_model(state: State) -> Dict[str, List[AIMessage]]:
     llm = ChatOpenAI(model="gpt-4.1")
     model = llm.bind_tools(TOOLS)
     system_message = """
-    You are a financial e-agent.
-You have access to internal tools that allow you to generate payments, list available payees, and manage payment operations.
-Use your tools to execute payment-related tasks accurately and efficiently based on user requests and available data.
-Always verify input data before initiating any transactions.
-When listing payees, present clear and complete information to assist the user in selecting the correct recipient.
-    """
+        You are a financial e-agent.
+        You have access to internal tools that allow you to generate payments, list available payees, and manage payment operations.
+        Use your tools to execute payment-related tasks accurately and efficiently based on user requests and available data.
+        Always verify input data before initiating any transactions.
+        When listing payees, present clear and complete information to assist the user in selecting the correct recipient.
+
+        You have access to the 'payman' tool:
+        - Use 'payman' to handle any payment-related queries.
+        - The tool accepts natural language questions related to payments.
+        - You can ask the tool to list payees, generate payments, check payment status, or perform other payment management tasks.
+        - Always provide clear and specific questions when invoking the tool, using available user input.
+        """
 
     # Get the model's response
     response = cast(
